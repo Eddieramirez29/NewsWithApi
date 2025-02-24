@@ -1,0 +1,63 @@
+.main-container
+{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#title
+{
+    margin-top: 25px;
+    width: 400px;
+    height: 100px;
+    color: black;
+    background-color: #F9F9F9;
+    font-weight: 600;
+    box-shadow: 5px 5px gray;
+}
+
+#urlToImage
+{
+    width: 400px;
+    height: 200px;
+    background-color: #F9F9F9;
+    box-shadow: 5px 5px gray;
+}
+
+#content
+{
+    width: 400px;
+    height: 200px;
+    color: black;
+    background-color: #F9F9F9;
+    box-shadow: 5px 5px gray;
+}
+
+#url
+{
+    width: 400px;
+    height: 50px;
+    color: black;
+    background-color: #F9F9F9;
+    font-weight: bold;
+    box-shadow: 5px 5px gray;
+}
+
+#url:hover
+{
+    color: rgb(53, 53, 53);
+}
+
+#publishedAt
+{
+    color: black;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F9F9F9;
+    box-shadow: 5px 5px gray;
+    margin-bottom: 25px;
+}
