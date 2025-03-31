@@ -100,14 +100,12 @@ const createElementsForNewsByCategory = (name, description, url) =>
         gotoNew.id = "url";
         gotoNew.href = url;
         gotoNew.innerHTML = "Read complete article";
-        // // Create publishedAt container
-        // publishedAtContainer.id = "publishedAt";
-        // publishedAtContainer.innerHTML = publishedAt.slice(0, 10) +" at " + publishedAt.slice(11, 19); //Gets date and time;
+
         main.appendChild(titleContainer);
         main.appendChild(urlToImageContainer);
         main.appendChild(contentContainer);
         main.appendChild(gotoNew);
-        // main.appendChild(publishedAtContainer);
+
         activateDeleteOption = true;
         activateCreateOption = false;
     }
