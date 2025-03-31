@@ -69,7 +69,7 @@ categoryButton.forEach((item) =>
 
 const searchByCategory = (category) =>
 {
-    const url = `https://newsapi.org/v2/top-headlines/sources?category=${category.toLowerCase()}&apiKey=${API_KEY}`;
+    const url = `https://newsapi.org/v2/top-headlines?category=${category.toLowerCase()}&language=en&apiKey=${API_KEY}`;
 
     fetch(url)
     .then(res => res.json())
@@ -262,6 +262,10 @@ function create5Elements(title, urlToImage, content, url, publishedAt)
 {
     for (let i = 0; i < title.length; i++)
         {
+            let titleContainer = document.createElement("div");
+            let contentContainer = document.createElement("div");
+            let gotoNew = document.createElement("a");
+
             // Set elements
             titleContainers[i].id = "title";
             titleContainers[i].innerHTML = title[i];
