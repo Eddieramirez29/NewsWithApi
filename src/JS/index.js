@@ -1,8 +1,8 @@
 const word = document.getElementById("inputSearch");
 const buttonSearch = document.getElementById("addon-wrapping");
-const API_KEY = "8de21ba8af164cb3a4a3b24540875c1d";
+const API_KEY = "cbeff85c319177a762a0570a4d45e0ca";
 
-const main = document.querySelector(".main-container");//Father container
+const main = document.querySelector(".main-container");
 
 const titleContainers =
 [
@@ -52,7 +52,7 @@ const publishedAtContainers =
 let activateDeleteOption = false;
 let activateCreateOption = true;
 
-//Element to detect category
+// Categoría
 const categoryButton = document.querySelectorAll(".dropdown-item-1");
 const categoryText = document.getElementById("category");
 
@@ -69,13 +69,13 @@ categoryButton.forEach((item) =>
 
 const searchByCategory = (category) =>
 {
-    const url = `https://newsapi.org/v2/top-headlines?category=${category.toLowerCase()}&language=en&apiKey=${API_KEY}`;
+    const url = `https://gnews.io/api/v4/top-headlines?category=${category.toLowerCase()}&lang=en&token=${API_KEY}`;
 
     fetch(url)
     .then(res => res.json())
     .then(res =>
     {
-        if (res.articles.length === 0 || !res.articles)
+        if (!res.articles || res.articles.length === 0)
         {
             console.log("No articles found");
             return;
@@ -90,8 +90,8 @@ const searchByCategory = (category) =>
         for (let i = 0; i < 5; i++)
         {
             titles[i] = res.articles[i].title;
-            urlToImages[i] = res.articles[i].urlToImage;
-            contents[i] = res.articles[i].content;
+            urlToImages[i] = res.articles[i].image;
+            contents[i] = res.articles[i].description;
             urls[i] = res.articles[i].url;
             publishedAts[i] = res.articles[i].publishedAt;
         }
@@ -118,14 +118,14 @@ sortByButton.forEach((item) =>
 
 const searchSortBy = (sortBy) =>
 {
-    const url = `https://newsapi.org/v2/everything?q=a&sortBy=${sortBy.toLowerCase()}&language=en&apiKey=${API_KEY}`;
+    // GNews no tiene sortBy real, pero lo simulamos con relevancia por defecto
+    const url = `https://gnews.io/api/v4/search?q=a&lang=en&token=${API_KEY}`;
 
-    
     fetch(url)
     .then(res => res.json())
     .then(res =>
     {
-        if (res.articles.length === 0 || !res.articles)
+        if (!res.articles || res.articles.length === 0)
         {
             console.log("Results not found");
             return;
@@ -140,8 +140,8 @@ const searchSortBy = (sortBy) =>
         for(let index = 0; index <= 4; index++)
         {
             titles[index] = res.articles[index].title;
-            urlToImages[index] = res.articles[index].urlToImage;
-            contents[index] = res.articles[index].content;
+            urlToImages[index] = res.articles[index].image;
+            contents[index] = res.articles[index].description;
             urls[index] = res.articles[index].url;
             publishedAts[index] = res.articles[index].publishedAt;
         }
@@ -149,9 +149,7 @@ const searchSortBy = (sortBy) =>
         createElementsForNews(titles, urlToImages, contents, urls, publishedAts);
     })
     .catch(err => console.error("Error:", err));
-}
-
-
+};
 
 const search = () =>
 {
@@ -162,12 +160,12 @@ const search = () =>
         return;
     }
 
-    const url = `https://newsapi.org/v2/everything?q=${query}&sortBy=publishedAt&language=en&apiKey=${API_KEY}`;
+    const url = `https://gnews.io/api/v4/search?q=${query}&lang=en&token=${API_KEY}`;
 
     fetch(url)
         .then(res => res.json())
         .then(res => {
-            if (res.articles.length === 0)
+            if (!res.articles || res.articles.length === 0)
             {
                 console.log("Results not found");
                 return;
@@ -182,12 +180,12 @@ const search = () =>
             for(let index = 0; index <= 4; index++)
             {
                 titles[index] = res.articles[index].title;
-                urlToImages[index] = res.articles[index].urlToImage;
-                contents[index] = res.articles[index].content;
+                urlToImages[index] = res.articles[index].image;
+                contents[index] = res.articles[index].description;
                 urls[index] = res.articles[index].url;
                 publishedAts[index] = res.articles[index].publishedAt;
             }
-            createElementsForNews(titles, urlToImages, contents, urls, publishedAts);
+            createElementsForNews(titles, urlToImages,contents, urls, publishedAts);
         })
         .catch(err => console.error("Error:", err));
 };
@@ -220,7 +218,7 @@ const createElementsForNews = (title, urlToImage, content, url, publishedAt) =>
         activateDeleteOption = true;
         activateCreateOption = false;
     }
-}
+};
 
 function create5Elements(title, urlToImage, content, url, publishedAt)
 {
@@ -233,7 +231,7 @@ function create5Elements(title, urlToImage, content, url, publishedAt)
         urlToImageContainers[i].src = urlToImage[i];
 
         contentContainers[i].id = "content";
-        contentContainers[i].innerHTML = content[i].replace(/… \[\+\d+ chars\]/, "");
+        contentContainers[i].innerHTML = content[i]?.replace(/… \[\+\d+ chars\]/, "") || "No content available";
 
         gotoNews[i].id = "url";
         gotoNews[i].href = url[i];
