@@ -23,8 +23,12 @@ body {
   align-items: center;
 }
 
-#search-button, #search-button {
-  border: none;
+.input-group-text:hover {
+  background-color: aqua;
+}
+
+.input-group-text:active {
+  transform: scale(0.9);
 }
 
 .header {

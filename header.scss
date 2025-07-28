@@ -29,9 +29,14 @@ body
     align-items: center;
 }
 
-#search-button, #search-button
+.input-group-text:hover
 {
-    border: none;
+    background-color: aqua;
+}
+
+.input-group-text:active
+{
+    transform: scale(0.90);
 }
 
 
