@@ -125,7 +125,7 @@ const searchSortBy = (sortBy) =>
     .then(res => res.json())
     .then(res =>
     {
-        if (res.articles.length === 0)
+        if (res.articles.length === 0 || !res.articles)
         {
             console.log("Results not found");
             return;
