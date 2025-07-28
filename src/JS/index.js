@@ -75,7 +75,7 @@ const searchByCategory = (category) =>
     .then(res => res.json())
     .then(res =>
     {
-        if (res.articles.length === 0)
+        if (res.articles.length === 0 || !res.articles)
         {
             console.log("No articles found");
             return;
